@@ -12,7 +12,7 @@
         if($user && password_verify($password, $user->password)) {
             $_SESSION['user_login'] = $user->login;
             setcookie('login', $login);
-            header('Location: index.php');
+            header('Location: gallery.php');
         }
         else
             echo 'Неверный логин или пароль';

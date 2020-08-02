@@ -27,7 +27,7 @@
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
         mail($email, 'Confirm the registration on Camagru', 'http://localhost/activation_email.php?login=$login&key=$token');
-        header('Location: login_page.php');
+        header('Location: gallery.php');
     }
 
 

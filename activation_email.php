@@ -13,4 +13,4 @@
         $params = ['login' => $login];
         $stmt->execute($params);
     }
-    header('Location: index.php');
+    header('Location: gallery.php');

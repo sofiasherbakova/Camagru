@@ -4,45 +4,20 @@
     include("./templates/_header.php");
     require_once 'config/db.php';
 ?>
+    <img src="img/back.jpg" class="back">
     <main>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <h3 class="gallery-title">username</h3>
-            </div>
-            <div class="gallery-item">
-                <a href="#"><img class="gallery-image" src="img/1.jpg" width="371" height="203"></a>
-                <h3 class="gallery-title">username</h3>
-            </div>
-            <div class="gallery-item">
-                <a href="#"><img class="gallery-image" src="img/1.jpg" width="371" height="203"></a>
-                <h3 class="gallery-title">username</h3>
-            </div>
-            <div class="gallery-item">
-                <a href="#"><img class="gallery-image" src="img/1.jpg" width="371" height="203"></a>
-                <h3 class="gallery-title">username</h3>
-            </div>
-            <div class="gallery-item">
-                <a href="#"><img class="gallery-image" src="img/1.jpg" width="371" height="203"></a>
-                <h3 class="gallery-title">username</h3>
-            </div>
-            <div class="gallery-item">
-                <a href="#"><img class="gallery-image" src="img/1.jpg" width="371" height="203"></a>
-                <h3 class="gallery-title">username</h3>
-            </div>
-            <div class="gallery-item">
-                <a href="#"><img class="gallery-image" src="img/1.jpg" width="371" height="203"></a>
-                <h3 class="gallery-title">username</h3>
-            </div>
-            <div class="gallery-item">
-                <a href="#"><img class="gallery-image" src="img/1.jpg" width="371" height="203"></a>
-                <h3 class="gallery-title">username</h3>
-            </div>
-            <div class="gallery-item">
-                <a href="#"><img class="gallery-image" src="img/1.jpg" width="371" height="203"></a>
-                <h3 class="gallery-title">username</h3>
-            </div>
+        <div class="container">
+            <form action="auth.php" method="post" class="login-form">
+                <div>Glad to see you!</div>
+                <input type="text" class="input" placeholder="Your login" name="login">
+                <input type="password" class="input" placeholder="Your password" name="password">
+                <button type="submit" class="button" name="OK">Log in</button>
+                <div class="form-text">No account? <a class="form-link" href="reg_page.php">Create one!</a></div>
+            </form>
         </div>
     </main>
+    <?php
+        include("./templates/_footer.php");
+    ?>
 </body>
 </html>
