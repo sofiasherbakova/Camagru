@@ -20,7 +20,15 @@
         $stmt->execute($params);
         if($stmt->fetchColumn())
             die('Пользователь с таким логином уже существует');
-        $token = md5('Secret_Word_CamaGru' . $login);     //генерирую уникальный токен
+        //проверка почты
+        $sql_check = 'SELECT EXISTS(SELECT email FROM users WHERE email = :email)';
+        $stmt = $pdo->prepare($sql_check);
+        $params = ['email' => $email];
+        $stmt->execute($params);
+        if($stmt->fetchColumn())
+            die('Пользователь с такой почтой уже зарегистрирован');
+        //генерирую уникальный токен
+        $token = md5('Secret_Word_CamaGru' . $login);
         $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = 'INSERT INTO users(login, email, password, token) VALUES(:login, :email, :password, :token)';
         $params = ['login' => $login, 'email' => $email, 'password' => $password, 'token' => $token];
@@ -29,6 +37,4 @@
         mail($email, 'Confirm the registration on Camagru', 'http://localhost/activation_email.php?login=$login&key=$token');
         header('Location: gallery.php');
     }
-
-
 

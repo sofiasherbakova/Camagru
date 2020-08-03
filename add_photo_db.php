@@ -10,8 +10,9 @@
 
     /*
      *
-	function file_download($file) {
-	if (file_exists($file)) {
+  function file_download($file) 
+  {
+	  if (file_exists($file)) {
     // сбрасываем буфер вывода PHP, чтобы избежать переполнения памяти выделенной под скрипт
 	// если этого не сделать файл будет читаться в память полностью!
     if (ob_get_level()) {

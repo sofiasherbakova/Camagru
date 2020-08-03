@@ -1,8 +1,8 @@
 <?php
 $title = '';
+require_once 'config/db.php';
 require_once './templates/_head.php';
 require_once './templates/_header.php';
-require_once 'config/db.php';
 ?>
 <main>
     <div class="profile-container">

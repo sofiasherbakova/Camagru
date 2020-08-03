@@ -1,8 +1,8 @@
 <?php
     $title = "";
+    require_once 'config/db.php';
     include("./templates/_head.php");
     include("./templates/_header.php");
-    require_once 'config/db.php';
 ?>
 <main>
     <div class="profile-container">
@@ -18,7 +18,7 @@
             <form action="change_login.php" method="post" class="profile-settings-list">
                 <div>Your login: <?php echo $_SESSION['user_login']?></div>
                 <input type="text" placeholder="New login" name="login">
-                <button type="submit" name="OK">Change</button>
+                <button type="submit" name="change_login">Change</button>
             </form>
             <?php
                 $sql = 'SELECT email FROM users WHERE login = :login';

@@ -1,8 +1,8 @@
 <?php 
-	$title = "";
+    $title = "";
+    require_once 'config/db.php';
 	include("./templates/_head.php");
     include("./templates/_header.php");
-    require_once 'config/db.php';
     $sql = 'SELECT * FROM images ORDER BY id DESC';
     $stmt = $pdo->prepare($sql);
     $stmt->execute();

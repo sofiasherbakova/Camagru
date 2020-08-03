@@ -1,8 +1,8 @@
 <?php
-	$title = "Главная";
+    $title = "Главная";
+    require_once 'config/db.php';
 	include("./templates/_head.php");
     include("./templates/_header.php");
-    require_once 'config/db.php';
 ?>
     <img src="img/back.jpg" class="back">
     <main>
