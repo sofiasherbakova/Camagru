@@ -1,5 +1,8 @@
 <?php
-    require_once 'config/db.php';
+    require_once '../config/db.php';
+    if (!isset($_SESSION))
+        session_start();
+    $title = "";
     $login = trim($_POST["login"]);
     $password = trim($_POST["password"]);
     if(!empty($login) && !empty($password))
@@ -12,7 +15,7 @@
         if($user && password_verify($password, $user->password)) {
             $_SESSION['user_login'] = $user->login;
             setcookie('login', $login);
-            header('Location: gallery.php');
+            header('Location: ../gallery_page.php');
         }
         else
             echo 'Неверный логин или пароль';

@@ -1,6 +1,7 @@
 <?php
-    require_once 'config/db.php';
-
+    require_once '../config/db.php';
+    if (!isset($_SESSION))
+        session_start();
     $login = trim($_POST["login"]);
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
@@ -30,11 +31,15 @@
         //генерирую уникальный токен
         $token = md5('Secret_Word_CamaGru' . $login);
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = 'INSERT INTO users(login, email, password, token) VALUES(:login, :email, :password, :token)';
+        $sql = 'INSERT INTO users(login, email, password, token, notification) VALUES(:login, :email, :password, :token, 1)';
         $params = ['login' => $login, 'email' => $email, 'password' => $password, 'token' => $token];
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
         mail($email, 'Confirm the registration on Camagru', 'http://localhost/activation_email.php?login=$login&key=$token');
-        header('Location: gallery.php');
+        
+        $_SESSION['user_login'] = $user->login;
+        setcookie('login', $user_login);
+        header('Location: ../gallery_page.php');
+        //добавить аллерт с "добро пожаловать!"
     }
 

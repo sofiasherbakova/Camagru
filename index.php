@@ -1,13 +1,19 @@
 <?php
+    if (!isset($_SESSION))
+        session_start();
+    if (isset($_SESSION['user_login']))
+    {
+        header('Location: gallery_page.php');
+    }
     $title = "Главная";
-    require_once 'config/db.php';
-	include("./templates/_head.php");
-    include("./templates/_header.php");
+    include_once "config/db.php";
+    include "./templates/_head.php";
+    include "./templates/_header.php";
 ?>
     <img src="img/back.jpg" class="back">
     <main>
         <div class="container">
-            <form action="auth.php" method="post" class="login-form">
+            <form action="processing/auth.php" method="post" class="login-form">
                 <div>Glad to see you!</div>
                 <input type="text" class="input" placeholder="Your login" name="login">
                 <input type="password" class="input" placeholder="Your password" name="password">

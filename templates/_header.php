@@ -2,7 +2,7 @@
 <header>
         <div class="menu">
             <div>
-                <a href="index.php"><img class="logo" src="img/logo.png" alt="logo"></a>
+                <a href="#"><img class="logo" src="img/logo.png" alt="logo"></a>
             </div>
             <div class="right-menu">
                 <a title="gallery" href="gallery_page.php"><img class="icon" src="img/gallery.png" alt="gallery"></a>

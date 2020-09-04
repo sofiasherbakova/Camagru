@@ -1,12 +1,15 @@
 <?php 
+    if (!isset($_SESSION))
+        session_start();
     $title = "";
-    include 'config/db.php';
-	include "./templates/_head.php";
+    include_once "config/db.php";
+    include "./templates/_head.php";
     include "./templates/_header.php";
-    $sql = 'SELECT * FROM images ORDER BY id DESC';
+   /* $sql = 'SELECT * FROM images ORDER BY id DESC';
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $gallery = $stmt->fetchAll();
+    */
 ?>
     <main>
         <div class="gallery">
