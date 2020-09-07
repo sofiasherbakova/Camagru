@@ -13,9 +13,10 @@
                                                     email VARCHAR(255) NOT NULL,
                                                     password VARCHAR(255) NOT NULL,
                                                     token VARCHAR(255) NOT NULL,
-                                                    notification VARCHAR(5) NOT NULL)");
-
-
+                                                    notification BOOLEAN DEFAULT TRUE)");
+        $pdo->exec("CREATE TABLE IF NOT EXISTS images (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                                                    login VARCHAR(255) NOT NULL,
+                                                    image VARCHAR(255) NOT NULL)");
     } catch (PDOException $e) {
         echo $sql.'<br>'.$e->getMessage();
     }

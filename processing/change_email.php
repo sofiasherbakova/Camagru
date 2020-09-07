@@ -1,24 +1,33 @@
 <?php
-    if(!empty($_POST["email"]))
-    {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-            echo 'Invalid email format';
-        //достаю старую почту
-        $sql = 'SELECT email FROM users WHERE login = :login';
-        $params = [':login' => $_SESSION['user_login']];
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-        $user = $stmt->fetch(PDO::FETCH_OBJ);
-        //проверка существует или нет
-        $sql_check = 'SELECT EXISTS(SELECT email FROM users WHERE email = :email)';
-        $stmt = $pdo->prepare($sql_check);
-        $params = ['email' => $user->email];
-        $stmt->execute($params);
-        if($stmt->fetchColumn())
-            die('Пользователь с такой почтой уже зарегистрирован');
-        //замена 
-        $sql = 'UPDATE users SET email = :new_email WHERE email = :email';
-        $stmt = $pdo->prepare($sql);
-        $params = ['email' => $user->email, 'new_email' => $_POST["email"]];
-        $stmt->execute($params);
+    require_once '../config/db.php';
+    if (!isset($_SESSION))
+        session_start();
+    if (empty($_POST['email'])) {
+        header("Location: ../profile_page.php?err=Please, fill in the blank.\n");
+        exit();
     }
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        header("Location: ../profile_page.php?err=Invalid email format.\n");
+        exit();
+    }
+    $email = $_POST['email'];
+    $login = $_SESSION['user_login'];
+    try {
+        $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE email = :email');
+        $params = ['email' => $email];
+        $stmt->execute($params);
+    } 
+    catch (PDOException $e) {
+        echo 'Error: '.$e->getMessage();
+        exit;
+    }
+    if ($stmt->fetchColumn()) {
+        header("Location: ../profile_page.php?err=An account with this email already exists.\n");
+        exit();
+    }
+    $sql = 'UPDATE users SET email = :email WHERE login = :login';
+    $stmt = $pdo->prepare($sql);
+    $params = ['login' => $login, 'email' => $email];
+    $stmt->execute($params);
+
+    header("Location: ../profile_page.php?err=Your email has been correctly changed.\n");

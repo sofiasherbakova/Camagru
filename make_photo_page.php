@@ -13,8 +13,8 @@
 ?>
 <main>
     <div class="profile-container">
-        <form action="add_photo.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="upload_img">
+        <form action="processing/upload_photo_dir.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="image">
             <input type="submit" name="submit" value="Upload">
         </form>
     </div>

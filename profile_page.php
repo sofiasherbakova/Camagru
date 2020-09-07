@@ -1,6 +1,8 @@
 <?php
     if (!isset($_SESSION))
         session_start();
+    if (!isset($_SESSION['user_login']))
+        header('Location: index.php');
     $title = "my profile";
     include_once "config/db.php";
     include "./templates/_head.php";
@@ -23,7 +25,7 @@
                 <button type="submit" name="change_login">Change</button>
             </form>
             <?php
-                $sql = 'SELECT email FROM users WHERE login = :login';
+                $sql = 'SELECT email, notification FROM users WHERE login = :login';
                 $params = [':login' => $_SESSION['user_login']];
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($params);
@@ -36,15 +38,15 @@
             </form>
             <form action="processing/change_password.php" method="post" class="profile-settings-list">
                 <div>Password</div>
-                <input type="text" placeholder="Old password" name="login">
-                <input type="text" placeholder="New password" name="login">
-                <input type="text" placeholder="Repeat password" name="login">
+                <input type="password" placeholder="Old password" name="old_password">
+                <input type="password" placeholder="New password" name="new_password">
+                <input type="password" placeholder="Repeat password" name="repeat_password">
                 <button type="submit" name="OK">Change</button>
             </form>
-            <div>
-                Notifications: on
+            <form action="processing/notification.php" method="post" class="profile-settings-list">
+                <div>Notifications: <?php if ($user->notification) echo "on"; else echo "off";?></div>
                 <button type="submit" name="OK">Change</button>
-            </div>
+            </form>
         </div>
     </div>
 </main>

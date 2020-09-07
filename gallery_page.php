@@ -5,78 +5,24 @@
     include_once "config/db.php";
     include "./templates/_head.php";
     include "./templates/_header.php";
-   /* $sql = 'SELECT * FROM images ORDER BY id DESC';
+    $sql = 'SELECT * FROM images ORDER BY id DESC';
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
-    $gallery = $stmt->fetchAll();
-    */
+    $photos_array = $stmt->fetchAll();
 ?>
     <main>
         <div class="gallery">
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-image" src="img/1.jpg">
-                <div class="gallery-title">username</div>
-            </div>
+            <?php 
+            foreach ($photos_array as $value)
+            {
+            ?>
+                <div class="gallery-item">
+                    <img class="gallery-image" src="<?php echo $value['image']; ?>">
+                    <div class="gallery-title"><?php echo $value['login']; ?></div>
+                </div> 
+            <?php
+                }
+            ?>
         </div>
     </main>
 </body>

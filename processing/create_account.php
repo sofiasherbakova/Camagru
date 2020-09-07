@@ -8,9 +8,9 @@
     $password_r = trim($_POST["password_r"]);
 
     if(empty($login) || empty($email) || empty($password) || empty($password_r))
-        echo 'Пожалуйста, заполните все поля';
+        echo 'Please, fill in the blanks';
     else if ($password != $password_r)
-        echo 'Пароли не совпадают';
+        echo 'Passwords are not match';
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         echo 'Invalid email format';
     else {
@@ -20,14 +20,14 @@
         $params = ['login' => $login];
         $stmt->execute($params);
         if($stmt->fetchColumn())
-            die('Пользователь с таким логином уже существует');
+            die('This login is already taken. Please, use different one');
         //проверка почты
         $sql_check = 'SELECT EXISTS(SELECT email FROM users WHERE email = :email)';
         $stmt = $pdo->prepare($sql_check);
         $params = ['email' => $email];
         $stmt->execute($params);
         if($stmt->fetchColumn())
-            die('Пользователь с такой почтой уже зарегистрирован');
+            die('An account with this email already exists');
         //генерирую уникальный токен
         $token = md5('Secret_Word_CamaGru' . $login);
         $password = password_hash($password, PASSWORD_DEFAULT);
