@@ -18,5 +18,5 @@
             header('Location: ../gallery_page.php');
         }
         else
-            echo 'Неверный логин или пароль';
+            echo 'Your login or password are not written correctly.';
     }

@@ -20,14 +20,20 @@
         $params = ['login' => $login];
         $stmt->execute($params);
         if($stmt->fetchColumn())
-            die('This login is already taken. Please, use different one');
+        {
+            header("Location: ../reg_page.php?err=This login is already taken. Please, use different one\n");
+            exit();
+        }
         //проверка почты
         $sql_check = 'SELECT EXISTS(SELECT email FROM users WHERE email = :email)';
         $stmt = $pdo->prepare($sql_check);
         $params = ['email' => $email];
         $stmt->execute($params);
         if($stmt->fetchColumn())
-            die('An account with this email already exists');
+        {
+            header("Location: ../reg_page.php?err=TAn account with this email already exists\n");
+            exit();
+        }
         //генерирую уникальный токен
         $token = md5('Secret_Word_CamaGru' . $login);
         $password = password_hash($password, PASSWORD_DEFAULT);
@@ -36,8 +42,7 @@
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
         mail($email, 'Confirm the registration on Camagru', 'http://localhost/activation_email.php?login=$login&key=$token');
-        
-        $_SESSION['user_login'] = $user->login;
+        $_SESSION['user_login'] = $login;
         setcookie('login', $user_login);
         header('Location: ../gallery_page.php');
         //добавить аллерт с "добро пожаловать!"

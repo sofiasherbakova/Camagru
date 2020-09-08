@@ -6,4 +6,3 @@
     $stmt = $pdo->prepare($sql);
     $params = ['login' => $_SESSION['user_login']];
     $stmt->execute($params);
-    header("Location: ../profile_page.php?err=Your login has been correctly changed.\n");

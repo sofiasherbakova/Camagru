@@ -14,4 +14,4 @@
     $stmt = $pdo->prepare($sql);
     $params = [':image' => $image_name, ':login' => $_SESSION['user_login']];
     $stmt->execute($params);
-    header("Location: ". "../make_photo_page.php");
+    header("Location: ". "../make_photo_page.php?err=Your photo has been uploaded!\n");
