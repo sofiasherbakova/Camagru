@@ -1,5 +1,5 @@
 <?php
-    include_once 'db.php';
+    include_once 'database.php';
 
     try {
         $pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
@@ -17,6 +17,9 @@
         $pdo->exec("CREATE TABLE IF NOT EXISTS images (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                                                     login VARCHAR(255) NOT NULL,
                                                     image VARCHAR(255) NOT NULL)");
+        $pdo->exec("CREATE TABLE IF NOT EXISTS likes (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                                                    login VARCHAR(255) NOT NULL,
+                                                    img_id VARCHAR(255) NOT NULL)");
     } catch (PDOException $e) {
         echo $sql.'<br>'.$e->getMessage();
     }

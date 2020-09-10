@@ -1,7 +1,7 @@
 <?php
     if (!isset($_SESSION))
         session_start();
-    include_once "../config/db.php";
+    include_once "../config/database.php";
     $dest_dir = "../uploads";
     $file = explode(".", $_FILES['image']['name']);
     $typefile = "." . $file[count($file) - 1];

@@ -4,7 +4,7 @@
     if (!isset($_SESSION['user_login']))
         header('Location: index.php');
     $title = "my profile";
-    include_once "config/db.php";
+    include_once "config/database.php";
     include "./templates/_head.php";
     include "./templates/_header.php";
 ?>

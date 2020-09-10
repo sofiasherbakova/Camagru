@@ -1,5 +1,5 @@
 <?php
-    require_once '../config/db.php';
+    require_once '../config/database.php';
     if (!isset($_SESSION))
         session_start();
     if (empty($_POST['email'])) {

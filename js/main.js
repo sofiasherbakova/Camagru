@@ -1,4 +1,3 @@
-
 function getUrlParameter(url, parameter)
 {
     parameter = parameter.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');

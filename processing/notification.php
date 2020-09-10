@@ -1,5 +1,5 @@
 <?php
-    require_once '../config/db.php';
+    require_once '../config/database.php';
     if (!isset($_SESSION))
         session_start();
     $sql = 'UPDATE users SET notification = NOT notification WHERE login = :login';

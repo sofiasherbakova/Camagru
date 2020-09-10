@@ -1,5 +1,5 @@
 <?php
-    require_once 'config/db.php';
+    require_once 'config/database.php';
     $login = $_GET['login'];
     $key = $_GET['key'];
     $sql = 'SELECT token, verified FROM users WHERE login = :login';

@@ -6,7 +6,7 @@
         header('Location: gallery_page.php');
     }
     $title = "Главная";
-    include_once "config/db.php";
+    include_once "config/database.php";
     include "./templates/_head.php";
     include "./templates/_header.php";
 ?>

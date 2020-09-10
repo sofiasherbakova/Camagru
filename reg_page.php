@@ -2,7 +2,7 @@
     if (!isset($_SESSION))
         session_start();
     $title = "register";
-    include_once "config/db.php";
+    include_once "config/database.php";
     include "./templates/_head.php";
     include "./templates/_header.php";
 ?>
