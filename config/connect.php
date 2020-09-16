@@ -1,5 +1,5 @@
 <?php
-include_once "database.php";
+/*include_once "database.php";
 
 $db_dsn =  $DB_DSN;
 $db_user = $DB_USER;
@@ -24,4 +24,4 @@ function connect_to_database()
 		die("Database connection failed: " . $e->getMessage());
 	}
 	return ($pdo);
-}
+}*/

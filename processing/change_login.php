@@ -8,16 +8,11 @@
     }
     $login = $_POST['login'];
     $old_login = $_SESSION['user_login'];
-
-    try {
-        $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE login = :login');
-        $params = ['login' => $login];
-        $stmt->execute($params);
-    } 
-    catch (PDOException $e) {
-        echo 'Error: '.$e->getMessage();
-        exit;
-    }
+    $pdo = connect_to_database();
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE login = :login');
+    $params = ['login' => $login];
+    $stmt->execute($params);
+    
     if ($stmt->fetchColumn()) {
         header("Location: ../profile_page.php?err=This login is already taken. Please, use different one\n");
         exit();

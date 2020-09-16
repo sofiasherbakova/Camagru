@@ -1,7 +1,7 @@
 <?php 
     if (!isset($_SESSION))
         session_start();
-    $title = "";
+    $title = "Gallery";
     include_once "config/database.php";
     include "./templates/_head.php";
     include "./templates/_header.php";
@@ -9,6 +9,7 @@
     <main>
         <div class="gallery">
             <?php
+                $pdo = connect_to_database();
                 $page = isset($_GET['page']) ? $_GET['page'] : 1;
                 $limit = 6;
                 $offset = $limit * ($page - 1);
@@ -20,12 +21,10 @@
                 {
             ?>
                 <div class="gallery-item">
-    
                     <a href='<?php echo "photo_page.php?image_id=" . $value['id'];?>'>
                         <img class="gallery-image" src="<?php echo $value['image']; ?>">
                     </a>
                     <div class="gallery-title"><?php echo $value['login']; ?></div>
-                    <img class="icon" src="img/like.png">
                 </div> 
             <?php
             }
@@ -35,20 +34,6 @@
                 }
             ?>
         </div>
-        <select id="page-select">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-        </select>
     </main>
-    <script src="js/main.js" type="text/javascript"></script>
 </body>
 </html>
-
-
-<form action="/processing/like.php" method="post">
-    <button type="submit" class="button" name="OK">
-        <img class="icon" src="img/like.png">
-    </button>
-</form>

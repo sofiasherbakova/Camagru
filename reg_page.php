@@ -1,4 +1,8 @@
-<?php 
+<?php
+    if ($_GET['err'])
+    {
+        echo "<script>alert(\"" . htmlentities($_GET['err']) . "\");window.location.href = \"reg_page.php\";</script>";
+    }
     if (!isset($_SESSION))
         session_start();
     $title = "register";

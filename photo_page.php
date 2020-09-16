@@ -8,8 +8,9 @@
     //добавить условие если не существует фотка, то страница не найдена
 ?>
     <main>
-        <div class="photo-page">
+        <div class="gallery">
             <?php
+                $pdo = connect_to_database();
                 $sql = 'SELECT * FROM images WHERE id = :id';
                 $stmt = $pdo->prepare($sql);
                 $params = [':id' => $_GET['image_id']];
@@ -19,9 +20,11 @@
                 <div class="gallery-item">
                     <img class="gallery-image" src="<?php echo $photo['image']; ?>">
                     <div class="gallery-title"><?php echo $photo['login']; ?></div>
-                    <img class="icon" src="img/like.png">
+                    <input type="image" src="img/like.png" class="icon" id="like">
+                    <div id="counter_likes"></div>
                 </div> 
         </div>
     </main>
+    <script src="js/like.js" type="text/javascript"></script>
 </body>
 </html>

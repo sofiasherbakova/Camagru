@@ -42,26 +42,44 @@ export PATH=${PATH}:/Users/ffood/.brew/opt/mysql@5.7/bin
 $pdo = null;
 ?
 
-сегодня:
-сделать алерты у форм
-подтверждение аккаунта и отправка писем 
-сделать сложность паролю
-сделать отдельный файл/функцию connect_to_database
 
-
-
-for ($i = 1; $i <= $total_pages; $i++) {
-echo "<a id='paginations' href='greetingcards.php?page=" . $i . "&displayAmount=".$selected."'>" . $i . "</a> ";
-}
-
-
-                $count_photos = count($photos_array);
-	            $photos_per_page = 6;
-	            $pages = ceil($count_photos / $photos_per_page);
-
-
-на этой неделе
-закончить лайки, отправку писем и аллерты, сделать минимальную верстку
+на этой неделе - закончить лайки, отправку писем и аллерты, сделать минимальную верстку
 на следующей - комментарии, камеру и верстку к ним
 на следующей - стикеры и адаптивную верстку
-на следующей - аякс, бонусы, сдача
+на следующей - доделки, бонусы, сдача
+
+
+html - кнопка
+пхп - взаимодействие с базой данных, который обрабатывает пост-запрос
+js - 
+1. создать экземпляр класса  XMLHttpRequest
+2. найти с помощью js все кнопки лайков
+3. создать ПОСТ-запрос
+
+        <select id="page-select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+
+console.log(this.responseText);
+
+ЗАВТРА: разбираюсь с комментариями
+доделать: You must log in to do this в like.php
+пагинация
+бонус: что по поводу отдавания файлов и вот этого всего? 
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename=' . basename($file));
+    header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($file));
+
+ПОСЛЕЗАВТРА: комментарии 
+добавить проверки - на пароль, логин, защиту от скрипта, защиту от неподходящих файлов к загрузке
+
+ПОСЛЕПОСЛЕЗАВТРА: 
+добавить в профиль страницы с фотками и комментариями

@@ -12,15 +12,11 @@
     }
     $email = $_POST['email'];
     $login = $_SESSION['user_login'];
-    try {
-        $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE email = :email');
-        $params = ['email' => $email];
-        $stmt->execute($params);
-    } 
-    catch (PDOException $e) {
-        echo 'Error: '.$e->getMessage();
-        exit;
-    }
+    $pdo = connect_to_database();
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE email = :email');
+    $params = ['email' => $email];
+    $stmt->execute($params);
+
     if ($stmt->fetchColumn()) {
         header("Location: ../profile_page.php?err=An account with this email already exists.\n");
         exit();

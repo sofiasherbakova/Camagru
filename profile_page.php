@@ -25,6 +25,7 @@
                 <button type="submit" name="change_login">Change</button>
             </form>
             <?php
+                $pdo = connect_to_database();
                 $sql = 'SELECT email, notification FROM users WHERE login = :login';
                 $params = [':login' => $_SESSION['user_login']];
                 $stmt = $pdo->prepare($sql);

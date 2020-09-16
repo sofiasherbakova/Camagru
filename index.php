@@ -1,4 +1,8 @@
 <?php
+    if ($_GET['err'])
+    {
+        echo "<script>alert(\"" . htmlentities($_GET['err']) . "\");window.location.href = \"index.php\";</script>";
+    }
     if (!isset($_SESSION))
         session_start();
     if (isset($_SESSION['user_login']))

@@ -10,6 +10,7 @@
     $_SESSION['file'] = $name;
     $res = move_uploaded_file($_FILES['image']['tmp_name'], "$dest_dir/$name");
     $image_name = "uploads/" . $name;
+    $pdo = connect_to_database();
     $sql = 'INSERT INTO images(login, image) VALUES(:login, :image)';
     $stmt = $pdo->prepare($sql);
     $params = [':image' => $image_name, ':login' => $_SESSION['user_login']];

@@ -7,16 +7,23 @@
     $password = trim($_POST["password"]);
     if(!empty($login) && !empty($password))
     {
-        $sql = 'SELECT login, password FROM users WHERE login = :login';
+        $pdo = connect_to_database();
+        $sql = 'SELECT login, password, verified FROM users WHERE login = :login';
         $params = [':login' => $login];
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
         $user = $stmt->fetch(PDO::FETCH_OBJ);
-        if($user && password_verify($password, $user->password)) {
+        if ($user && password_verify($password, $user->password)) 
+        {
+            if (!$user->verified)
+            {
+                header("Location: ../index.php?err=Please, confirm your account\n");
+                exit();
+            }
             $_SESSION['user_login'] = $user->login;
             setcookie('login', $login);
             header('Location: ../gallery_page.php');
         }
         else
-            echo 'Your login or password are not written correctly.';
+            header("Location: ../index.php?err=Your login or password are not written correctly\n");
     }

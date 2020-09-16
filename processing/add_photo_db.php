@@ -1,6 +1,8 @@
 <?php
     require_once 'config/database.php';
-    if (isset($_FILES['upload_img']['tmp_name'])) {
+    if (isset($_FILES['upload_img']['tmp_name'])) 
+    {
+        $pdo = connect_to_database();
         $sql = 'INSERT INTO images(image, username) VALUES(:image, :username)';
         $stmt = $pdo->prepare($sql);
         $file = file_get_contents($_FILES['upload_img']['tmp_name']);
