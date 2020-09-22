@@ -9,6 +9,7 @@ body {
 
 a {
   text-decoration: none;
+  color: #000000;
 }
 
 img {
@@ -134,10 +135,18 @@ img {
 }
 
 .gallery-item{
+  object-fit: cover;
   width: 30%;
   margin-bottom: 1%;
   font-family: Calibre_Light;
 }
+
+.gallery-image{
+  width: 400px;
+  object-fit: cover;
+  height: 400px;
+}
+
 /*профиль*/
 .profile-container{
   margin-left: 10%;
@@ -186,52 +195,67 @@ img {
   margin-bottom: 5%;
 }
 
-/* камера */
+/**** камера *****/
 
-#video {
-  border: 1px solid black;
-  box-shadow: 2px 2px 3px black;
-  width:320px;
-  height:240px;
+.photo-upload {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5%;
 }
 
-#photo {
-  border: 1px solid black;
-  box-shadow: 2px 2px 3px black;
-  width:320px;
-  height:240px;
+.photo-edit__canvas {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  margin: 25px auto;
 }
 
-#canvas {
-  display:none;
+.photo-edit #preview, #origin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100%;
+  max-width: 100%;
 }
 
-.camera {
-  width: 340px;
-  display:inline-block;
+#origin {
+  visibility: hidden;
 }
 
-.output {
-  width: 340px;
-  display:inline-block;
+canvas, video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100%;
+  max-width: 100%;
+  display: none;
 }
 
-#startbutton {
-  display:block;
-  position:relative;
-  margin-left:auto;
-  margin-right:auto;
-  bottom:32px;
-  background-color: rgba(0, 150, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
-  font-size: 14px;
-  font-family: "Lucida Grande", "Arial", sans-serif;
-  color: rgba(255, 255, 255, 1.0);
+.photo-edit .custom-file-upload img {
+  height: 40px;
+  margin-right: 15px;
 }
 
-.contentarea {
+.photo-upload label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.photo-upload label:hover {
+  color: #999;
+}
+
+.photo-upload p {
   font-size: 16px;
-  font-family: "Lucida Grande", "Arial", sans-serif;
-  width: 760px;
+  text-transform: uppercase;
+  font-weight: 700;
 }
+
+.photo-upload input, #snapshot {
+  display: none;
+}
+

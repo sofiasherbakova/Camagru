@@ -6,9 +6,7 @@
     if (!isset($_SESSION))
         session_start();
     if (isset($_SESSION['user_login']))
-    {
         header('Location: gallery_page.php');
-    }
     $title = "Главная";
     include_once "config/database.php";
     include "./templates/_head.php";

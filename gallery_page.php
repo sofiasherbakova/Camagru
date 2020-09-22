@@ -20,20 +20,22 @@
                 foreach ($photos_array as $value)
                 {
             ?>
-                <div class="gallery-item">
+                <div class="">
                     <a href='<?php echo "photo_page.php?image_id=" . $value['id'];?>'>
                         <img class="gallery-image" src="<?php echo $value['image']; ?>">
                     </a>
                     <div class="gallery-title"><?php echo $value['login']; ?></div>
                 </div> 
-            <?php
+                <?php
             }
+            ?>
+            </div>
+            <?php
             $pages = 2;
             for ($i = 1; $i <= $pages; $i++) {
                 echo "<a id='paginations' href='gallery_page.php?page=" . $i ."'>" . $i . "</a> ";
                 }
             ?>
-        </div>
     </main>
 </body>
 </html>

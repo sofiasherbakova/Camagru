@@ -1,7 +1,11 @@
 <?php 
+    if ($_GET['err'])
+        echo "<script>alert(\"" . htmlentities($_GET['err']) . "\");window.location.href = \"gallery_page.php\";</script>";
     if (!isset($_SESSION))
         session_start();
-    $title = "";
+    if (empty($_SESSION['user_login'])) 
+        header("Location: ../photo_page.php?err=You must log in to do this\n");
+    $title = "Photo";
     include_once "config/database.php";
     include "./templates/_head.php";
     include "./templates/_header.php";
