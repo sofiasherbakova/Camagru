@@ -27,6 +27,30 @@
                     <input type="image" src="img/like.png" class="icon" id="like">
                     <div id="counter_likes"></div>
                 </div> 
+                <div class="comments">
+                    <?php
+                        $pdo = connect_to_database();
+                        $sql = 'SELECT * FROM comments WHERE img_id = :img_id';
+                        $stmt = $pdo->prepare($sql);
+                        $params = [':img_id' => $_GET['image_id']];
+                        $stmt->execute($params);
+                        $comments = $stmt->fetchAll();
+                        foreach ($comments as $comment)
+                        {
+                    ?>
+                        <div class="gallery-title"><?php echo $comment['login']; ?></div>
+                        <div class=""><?php echo $comment['comment']; ?></div>
+                        </br>
+                    <?php
+                        }
+                    ?>
+
+
+                    <form action=<?php echo "processing/comments.php?image_id=". $_GET['image_id']?> method='post'>
+                        <input class='input' style='width:100%;' type='text' placeholder='Enter your comment' name='comment' required>
+                        <button type='submit' class='button'>Send</button>
+                    </form>
+            </div>
         </div>
     </main>
     <script src="js/like.js" type="text/javascript"></script>

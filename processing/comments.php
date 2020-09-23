@@ -5,12 +5,11 @@
         header('Location: index.php?err=You must log in to access this page.');
         exit();
     }
-    if (empty($_POST['comment']) || empty($_GET['img_id'])) {
+    if (empty($_POST['comment']) || empty($_GET['image_id'])) {
         header("Location: ../gallery_page.php?page=$_GET[page]");
         exit();
     }
-    include_once '../config/database.php';
-        header("Location: ../gallery_page.php?page=$_GET[page]");    
+    include_once '../config/database.php';  
     $comment = trim($_POST['comment']);
     $comment = stripslashes($comment);
 	$comment = strip_tags($comment);
@@ -19,19 +18,20 @@
 
     $pdo = connect_to_database();
     $stmt = $pdo->prepare('INSERT INTO comments (login, img_id, comment) VALUES (:login, :img_id, :comment)');
-    $stmt->bindParam(':img_id', $_GET['img_id'], PDO::PARAM_INT);
+    $stmt->bindParam(':img_id', $_GET['image_id'], PDO::PARAM_INT);
     $stmt->bindParam(':login', $_SESSION['user_login'], PDO::PARAM_STR);
     $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
     $stmt->execute();
     
-    $stmt = $pdo->prepare('SELECT users.mail FROM users INNER JOIN snap ON users.login = snap.login WHERE snap.id = :img_id AND notific = "1"');
-    $stmt->bindParam(':img_id', $_GET['img_id'], PDO::PARAM_INT);
+    $stmt = $pdo->prepare('SELECT users.email FROM users INNER JOIN images ON users.login = images.login WHERE images.id = :img_id AND notification = "1"');
+    $stmt->bindParam(':img_id', $_GET['image_id'], PDO::PARAM_INT);
     $stmt->execute();
 
-    $mail = $sth->fetchColumn();
+    $mail = $stmt->fetchColumn();
     $to = $mail;
     $subject = 'Camagru | New comment';
-    $message = "
-    A new comment has been posted on your photo by : $_SESSION[user_login]
+    $message = "A new comment has been posted on your photo by : $_SESSION[user_login]
     Comment : $_POST[comment]"; 
     mail($to, $subject, $message);
+
+    header("Location: ../photo_page.php?image_id=$_GET[image_id]");

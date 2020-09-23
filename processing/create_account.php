@@ -42,7 +42,8 @@
         $params = ['login' => $login, 'email' => $email, 'password' => $password, 'token' => $token];
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
-        mail($email, 'Confirm the registration on Camagru', 'http://localhost/activation_email.php?login=' . $login . '&key=' . $token);
+        $link ="http://" .  $_SERVER['HTTP_HOST'] . '/processing/activation_email.php?login=' . $login . '&key=' . $token;
+        mail($email, 'Confirm the registration on Camagru', $link);
         header('Location: ../index.php?err=Вы успешно зарегистрировались! Для подтверждения аккаунта перейдите по ссылке, которую мы отправили Вам на почту');
     }
 
