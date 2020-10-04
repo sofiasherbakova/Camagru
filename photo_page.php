@@ -1,5 +1,5 @@
 <?php 
-    if ($_GET['err'])
+    if (isset($_GET['err']))
         echo "<script>alert(\"" . htmlentities($_GET['err']) . "\");window.location.href = \"gallery_page.php\";</script>";
     if (!isset($_SESSION))
         session_start();
@@ -12,7 +12,7 @@
     //добавить условие если не существует фотка, то страница не найдена
 ?>
     <main>
-        <div class="gallery">
+        <div class="photo-container">
             <?php
                 $pdo = connect_to_database();
                 $sql = 'SELECT * FROM images WHERE id = :id';
@@ -22,8 +22,8 @@
                 $photo = $stmt->fetch();
             ?>
                 <div class="gallery-item">
-                    <img class="gallery-image" src="<?php echo $photo['image']; ?>">
-                    <div class="gallery-title"><?php echo $photo['login']; ?></div>
+                    <img class="" src="<?php echo $photo['image']; ?>">
+                    <div class=""><?php echo $photo['login']; ?></div>
                     <input type="image" src="img/like.png" class="icon" id="like">
                     <div id="counter_likes"></div>
                 </div> 
@@ -38,17 +38,15 @@
                         foreach ($comments as $comment)
                         {
                     ?>
-                        <div class="gallery-title"><?php echo $comment['login']; ?></div>
+                        <div class="user-login"><?php echo $comment['login']; ?></div>
                         <div class=""><?php echo $comment['comment']; ?></div>
-                        </br>
                     <?php
                         }
                     ?>
 
-
                     <form action=<?php echo "processing/comments.php?image_id=". $_GET['image_id']?> method='post'>
-                        <input class='input' style='width:100%;' type='text' placeholder='Enter your comment' name='comment' required>
-                        <button type='submit' class='button'>Send</button>
+                        <input class='' style='width:100%;' type='text' autocomplete='off' placeholder='Enter your comment' name='comment' required>
+                        <button class='' type='submit'>Send</button>
                     </form>
             </div>
         </div>

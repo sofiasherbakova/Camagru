@@ -259,3 +259,20 @@ canvas, video {
   display: none;
 }
 
+/*** фотография ***/
+
+.photo-container{
+  margin-left: 10%;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* main */
+
+.user-login {
+  font-weight: bold;
+}
