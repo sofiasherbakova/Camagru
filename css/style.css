@@ -27,6 +27,7 @@ img {
   src: url("../fonts/Calibre-Light.ttf");
 }
 /*шапка*/
+
 .icon {
   width: 2.5em;
   margin-right: 1em;
@@ -121,30 +122,23 @@ img {
 }
 /*галлерея*/
 .gallery{
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(72, 72, 72, 0.5);
-  margin-left: 10%;
+  max-width: 1640px;
+  margin: auto;
   margin-top: 5%;
-  margin-bottom: 5%;
   width: 80%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  padding-top: 1%;
-  padding-bottom: 1%;
+  justify-content: space-around;          
 }
 
 .gallery-item{
-  object-fit: cover;
-  width: 30%;
-  margin-bottom: 1%;
-  font-family: Calibre_Light;
+  padding: 1%;
 }
 
 .gallery-image{
   width: 400px;
-  object-fit: cover;
   height: 400px;
+  object-fit: cover;
 }
 
 /*профиль*/
@@ -275,4 +269,34 @@ canvas, video {
 
 .user-login {
   font-weight: bold;
+}
+
+
+/* pagination */
+
+.pagination {
+  text-align: center;
+  padding: 15px 0;
+}
+
+.pagination a, .pagination p {
+  color: #000;
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination p {
+  opacity: 0.3;
+}
+
+.pagination a.active {
+  background: #6d6969;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.pagination a:hover:not(.active) {
+  background: #e6e7ed;
+  border-radius: 5px;
 }

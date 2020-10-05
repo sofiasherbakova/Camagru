@@ -1,6 +1,8 @@
 <?php 
     if (!isset($_SESSION))
         session_start();
+    if (!isset($_GET['page']))
+        header("Location: ../gallery_page.php?page=1\n");
     $title = "Gallery";
     include_once "config/database.php";
     include "./templates/_head.php";
@@ -13,6 +15,10 @@
                 $page = isset($_GET['page']) ? $_GET['page'] : 1;
                 $limit = 6;
                 $offset = $limit * ($page - 1);
+                $sql = 'SELECT * FROM images';
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute();
+                $pages = ceil($stmt->rowCount() / $limit);
                 $sql = 'SELECT * FROM images ORDER BY id DESC LIMIT ' . $offset . ', '. $limit;
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute();
@@ -20,7 +26,7 @@
                 foreach ($photos_array as $value)
                 {
             ?>
-                <div class="">
+                <div class="gallery-item">
                     <a href='<?php echo "photo_page.php?image_id=" . $value['id'];?>'>
                         <img class="gallery-image" src="<?php echo $value['image']; ?>">
                     </a>
@@ -30,12 +36,7 @@
             }
             ?>
             </div>
-            <?php
-            $pages = 2;
-            for ($i = 1; $i <= $pages; $i++) {
-                echo "<a id='paginations' href='gallery_page.php?page=" . $i ."'>" . $i . "</a> ";
-                }
-            ?>
+            <?php include "templates/_pagination.php"; ?>
     </main>
 </body>
 </html>

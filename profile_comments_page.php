@@ -31,10 +31,10 @@
                 foreach ($comments_array as $comment)
                 {
             ?>
-                <div class="">
-                    <div class=""><?php echo $comment['login']; ?></div>
-                    <div class=""><?php echo $comment['comment']; ?></div>
-                </div> 
+                <div class="one-comment">
+                    <span class="user-login"><?php echo $comment['login']; ?></span>
+                    <span class=""><?php echo $comment['comment']; ?></span>
+                </div>
                 <?php
             }
             ?>

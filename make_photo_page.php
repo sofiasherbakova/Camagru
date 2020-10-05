@@ -43,7 +43,7 @@
         </div>
 
         <div class="photo-edit__canvas">
-            <img id="preview" src="img/user.png" alt="preview">
+            <img id="preview" src="img/no_image.png" alt="preview">
             <img id="origin" src="img/1.jpg">
             <video id="video"></video>
             <canvas id="canvas"></canvas>
@@ -62,7 +62,7 @@
 
         <form method="post" enctype="multipart/form-data">
             <input id="save" name="src" type="hidden" value="img/1.jpg">
-            <input id="save_btn" class="btn-blue btn-save" name="save" type="submit" value="Save" disabled>
+            <input id="save_btn" class="button" name="save" type="submit" value="Save" disabled>
         </form>
     </div>
     </main>

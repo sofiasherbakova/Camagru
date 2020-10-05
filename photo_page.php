@@ -22,10 +22,13 @@
                 $photo = $stmt->fetch();
             ?>
                 <div class="gallery-item">
-                    <img class="" src="<?php echo $photo['image']; ?>">
+                    <form action=<?php echo 'processing/remove_image.php?image_id=' . $_GET['image_id']?> method='post'>
+                        <input class='icon' type="image" alt='Delete photo' src="img/cancel.png">
+                    </form>
                     <div class=""><?php echo $photo['login']; ?></div>
+                    <img class="" src="<?php echo $photo['image']; ?>">
                     <input type="image" src="img/like.png" class="icon" id="like">
-                    <div id="counter_likes"></div>
+                    <span id="counter_likes"></span>
                 </div> 
                 <div class="comments">
                     <?php
@@ -38,8 +41,13 @@
                         foreach ($comments as $comment)
                         {
                     ?>
-                        <div class="user-login"><?php echo $comment['login']; ?></div>
-                        <div class=""><?php echo $comment['comment']; ?></div>
+                        <div class="one-comment">
+                            <span class="user-login"><?php echo $comment['login']; ?></span>
+                            <span class=""><?php echo $comment['comment']; ?></span>
+                            <form action=<?php echo 'processing/remove_comment.php?image_id=' . $_GET['image_id']?> method='post'>
+                                <input class='icon' type="image" alt='Delete photo' src="img/cancel.png">
+                            </form>
+                        </div>
                     <?php
                         }
                     ?>
