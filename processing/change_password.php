@@ -7,9 +7,18 @@
         header("Location: ../profile_page.php?err=Please, fill in the blanks\n");
         exit();
     }
-    $old_password = $_POST['old_password'];
-    $new_password = $_POST['new_password'];
-    $repeat_password = $_POST['repeat_password'];
+    function clean_data($value)
+    {
+        $value = trim($value);
+        $value = stripslashes($value);
+        $value = strip_tags($value);
+        $value = htmlspecialchars($value);
+        $value = addslashes($value);
+        return ($value);
+    }
+    $old_password = clean_data($_POST['old_password']);
+    $new_password = clean_data($_POST['new_password']);
+    $repeat_password = clean_data($_POST['repeat_password']);
     $pdo = connect_to_database();
     $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE login = :login');
     $params = ['login' => $_SESSION['user_login']];

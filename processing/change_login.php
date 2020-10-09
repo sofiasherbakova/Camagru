@@ -6,7 +6,17 @@
         header("Location: ../profile_page.php?err=Please, fill in the blank\n");
         exit();
     }
-    $login = $_POST['login'];
+    function clean_data($value)
+    {
+        $value = trim($value);
+        $value = stripslashes($value);
+        $value = strip_tags($value);
+        $value = htmlspecialchars($value);
+        $value = addslashes($value);
+        return ($value);
+    }
+
+    $login = clean_data($_POST['login']);
     $old_login = $_SESSION['user_login'];
     $pdo = connect_to_database();
     $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE login = :login');

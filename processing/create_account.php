@@ -2,11 +2,22 @@
     require_once '../config/database.php';
     if (!isset($_SESSION))
         session_start();
-    $login = trim($_POST["login"]);
-    $email = trim($_POST["email"]);
-    $password = trim($_POST["password"]);
-    $password_r = trim($_POST["password_r"]);
+        
+    function clean_data($value)
+    {
+        $value = trim($value);
+        $value = stripslashes($value);
+        $value = strip_tags($value);
+        $value = htmlspecialchars($value);
+        $value = addslashes($value);
+        return ($value);
+    }
 
+    $login = clean_data($_POST["login"]);
+    $email = clean_data($_POST["email"]);
+    $password = clean_data($_POST["password"]);
+    $password_r = clean_data($_POST["password_r"]);
+    
     if(empty($login) || empty($email) || empty($password) || empty($password_r))
         header("Location: ../reg_page.php?err=Please, fill in the blanks\n");
     else if ($password != $password_r)

@@ -17,13 +17,18 @@
 	$comment = addslashes($comment);
 
     $pdo = connect_to_database();
-    $stmt = $pdo->prepare('INSERT INTO comments (login, img_id, comment) VALUES (:login, :img_id, :comment)');
+    $stmt = $pdo->prepare('SELECT id FROM users WHERE login = :login');
+    $params = [':login' => $_SESSION['user_login']];
+    $stmt->execute($params);
+    $user = $stmt->fetch(PDO::FETCH_OBJ);
+    $id = $user->id;
+    $stmt = $pdo->prepare('INSERT INTO comments (user_id, img_id, comment) VALUES (:user_id, :img_id, :comment)');
     $stmt->bindParam(':img_id', $_GET['image_id'], PDO::PARAM_INT);
-    $stmt->bindParam(':login', $_SESSION['user_login'], PDO::PARAM_STR);
+    $stmt->bindParam(':user_id', $id, PDO::PARAM_INT);
     $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
     $stmt->execute();
     
-    $stmt = $pdo->prepare('SELECT users.email FROM users INNER JOIN images ON users.login = images.login WHERE images.id = :img_id AND notification = "1"');
+    $stmt = $pdo->prepare('SELECT users.email FROM users INNER JOIN images ON users.id = images.user_id WHERE images.id = :img_id AND notification = "1"');
     $stmt->bindParam(':img_id', $_GET['image_id'], PDO::PARAM_INT);
     $stmt->execute();
 

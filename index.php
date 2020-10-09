@@ -9,12 +9,20 @@
         header('Location: gallery_page.php');
     $title = "Главная";
     include_once "config/database.php";
-    include "./templates/_head.php";
+?>
+    <!DOCTYPE html>
+    <html class="login-container">
+        <head>
+            <meta charset="UTF-8">
+            <title><?php echo $title; ?></title>
+            <link rel="stylesheet" href="css/style.css">
+        </head>
+    <body>
+<?php
     include "./templates/_header.php";
 ?>
-    <img src="img/back.jpg" class="back">
     <main>
-        <div class="container">
+        <div>
             <form action="processing/auth.php" method="post" class="login-form">
                 <div>Glad to see you!</div>
                 <input type="text" class="input" placeholder="Your login" name="login">
@@ -23,9 +31,9 @@
                 <div class="form-text">No account? <a class="form-link" href="reg_page.php">Create one!</a></div>
             </form>
         </div>
+        <?php
+            include("./templates/_footer.php");
+        ?>
     </main>
-    <?php
-        include("./templates/_footer.php");
-    ?>
 </body>
 </html>

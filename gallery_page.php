@@ -28,9 +28,8 @@
             ?>
                 <div class="gallery-item">
                     <a href='<?php echo "photo_page.php?image_id=" . $value['id'];?>'>
-                        <img class="gallery-image" src="<?php echo $value['image']; ?>">
+                        <img class="gallery-image" src="<?php echo $value['img_path']; ?>">
                     </a>
-                    <div class="gallery-title"><?php echo $value['login']; ?></div>
                 </div> 
                 <?php
             }

@@ -16,15 +16,20 @@
                                                     notification BOOLEAN DEFAULT TRUE,
                                                     verified BOOLEAN DEFAULT FALSE)");
         $pdo->exec("CREATE TABLE IF NOT EXISTS images (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                                                    login VARCHAR(255) NOT NULL,
-                                                    image VARCHAR(255) NOT NULL)");
+                                                    user_id int(9) UNSIGNED NOT NULL,
+                                                    img_path VARCHAR(255) NOT NULL,
+                                                    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE)");
         $pdo->exec("CREATE TABLE IF NOT EXISTS likes (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                                                    login VARCHAR(255) NOT NULL,
-                                                    img_id VARCHAR(255) NOT NULL)");
+                                                    user_id int(9) UNSIGNED NOT NULL,
+                                                    img_id INT(9) UNSIGNED NOT NULL, 
+                                                    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
+                                                    FOREIGN KEY (img_id) REFERENCES images (id) ON DELETE CASCADE)");
         $pdo->exec("CREATE TABLE IF NOT EXISTS comments (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                                                    login VARCHAR(255) NOT NULL,
-                                                    img_id VARCHAR(255) NOT NULL,
-                                                    comment VARCHAR (255) NOT NULL)");
+                                                    user_id INT(9) UNSIGNED NOT NULL,
+                                                    img_id INT(9) UNSIGNED NOT NULL,
+                                                    comment VARCHAR (255) NOT NULL,
+                                                    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE, 
+                                                    FOREIGN KEY (img_id) REFERENCES images (id) ON DELETE CASCADE)");
     } catch (PDOException $e) {
         echo $sql . '<br>' . $e->getMessage();
     }

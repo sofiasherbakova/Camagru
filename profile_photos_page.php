@@ -23,8 +23,13 @@
         <div class="profile-settings">
             <?php
                 $pdo = connect_to_database();
-                $sql = 'SELECT image, id FROM images WHERE login = :login';
+                $stmt = $pdo->prepare('SELECT id FROM users WHERE login = :login');
                 $params = [':login' => $_SESSION['user_login']];
+                $stmt->execute($params);
+                $user = $stmt->fetch();
+                $id = $user['id'];
+                $sql = 'SELECT img_path, id FROM images WHERE user_id = :id';
+                $params = [':id' => $id];
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($params);
                 $photos_array = $stmt->fetchAll();
@@ -33,9 +38,8 @@
             ?>
                 <div class="">
                     <a href='<?php echo "photo_page.php?image_id=" . $value['id'];?>'>
-                        <img class="gallery-image" src="<?php echo $value['image']; ?>">
+                        <img class="gallery-image" src="<?php echo $value['img_path']; ?>">
                     </a>
-                    <div class="gallery-title"><?php echo $value['login']; ?></div>
                 </div> 
                 <?php
             }

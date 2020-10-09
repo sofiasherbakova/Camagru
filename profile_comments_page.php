@@ -23,8 +23,13 @@
         <div class="profile-settings">
             <?php
                 $pdo = connect_to_database();
-                $sql = 'SELECT * FROM comments WHERE login = :login';
+                $stmt = $pdo->prepare('SELECT id FROM users WHERE login = :login');
                 $params = [':login' => $_SESSION['user_login']];
+                $stmt->execute($params);
+                $user = $stmt->fetch();
+                $id = $user['id'];
+                $sql = 'SELECT * FROM comments WHERE user_id = :id';
+                $params = [':id' => $id];
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($params);
                 $comments_array = $stmt->fetchAll();

@@ -13,16 +13,21 @@
     
     if (isset($_POST['save']) && $_POST['save']) 
     {
+        $pdo = connect_to_database();
+        $stmt = $pdo->prepare('SELECT id FROM users WHERE login = :login');
+        $params = [':login' => $_SESSION['user_login']];
+        $stmt->execute($params);
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
+
         $dest_dir = "../uploads";
         $time = mktime();
         $new_src = "uploads/" . $_SESSION['user_login'] . $time . '.png';
         file_put_contents($new_src, file_get_contents($_POST['src']));
 
-        $pdo = connect_to_database();
-        $sql = 'INSERT INTO images(login, image) VALUES(:login, :image)';
-        $stmt = $pdo->prepare($sql);
-        $params = [':image' => $new_src, ':login' => $_SESSION['user_login']];
-        $stmt->execute($params);
+        $sql = 'INSERT INTO images(img_path, user_id) VALUES(:image, :user_id)';
+        $st = $pdo->prepare($sql);
+        $params = [':image' => $new_src, ':user_id' => $user->id];
+        $st->execute($params);
         //header("Location: ". "../make_photo_page.php?err=Your photo has been uploaded!\n");    
     }
 

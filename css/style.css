@@ -20,7 +20,7 @@ img {
 @font-face {
   font-family: Poiret_One;
   src: url(../fonts/Poiret_One.ttf);
-}
+}  
 
 @font-face {
   font-family: "Calibre_Light";
@@ -44,9 +44,6 @@ img {
   right: 5%;
 }
 
-.back{
-  width: 100%;
-}
 
 .menu{
   background-color: rgba(72, 72, 72, 0.7);
@@ -68,6 +65,17 @@ img {
   left: 5%;
 }
 /*форма логина*/
+
+.login-container{
+  width: 100%;
+  height: 100%;
+  background: url(../img/back.jpg/) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .login-form{
   font-family: Poiret One;
   font-size: 2em;
@@ -116,7 +124,6 @@ img {
   border: none;
   margin: 20px auto;
   padding: 10px 20px;
-  font-family: Poiret One;
   font-size: 18pt;
   color: white;
 }
@@ -136,6 +143,7 @@ img {
 }
 
 .gallery-image{
+  border: 1px solid rgba(72, 72, 72, 0.6);
   width: 400px;
   height: 400px;
   object-fit: cover;
@@ -263,6 +271,68 @@ canvas, video {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.comments{
+  position: relative;
+  width: 30%;
+}
+
+.one-comment{
+  position: relative;
+}
+
+.delete{
+  width: 1em;
+  position: absolute;
+  right: 0;
+}
+
+.comment-form{
+  position: absolute;
+  bottom: 8px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.comment-input{
+  width: 60%;
+  background: white;
+  text-align: center;
+  border: 1px solid rgba(72, 72, 72);
+  outline: none;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 10pt;
+  color: black;
+}
+
+.header-photo{
+  display: flex;
+  width: 400px;
+  background: white;
+  text-align: center;
+  border: 1px solid rgba(72, 72, 72, 0.6);
+  outline: none;
+  position: relative;
+  padding: 10px 0px;
+  font-family: Calibre_Light;
+  font-size: 10pt;
+  color: black;
+}
+
+.login-photo{
+  font-size: 2em;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 8px;
+}
+
+.delete-photo{
+  width: 2em;
+  position: absolute;
+  margin-top: 8px;
+  right: 20px;
 }
 
 /* main */

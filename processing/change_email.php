@@ -2,6 +2,16 @@
     require_once '../config/database.php';
     if (!isset($_SESSION))
         session_start();
+    function clean_data($value)
+    {
+        $value = trim($value);
+        $value = stripslashes($value);
+        $value = strip_tags($value);
+        $value = htmlspecialchars($value);
+        $value = addslashes($value);
+        return ($value);
+    }
+    
     if (empty($_POST['email'])) {
         header("Location: ../profile_page.php?err=Please, fill in the blank.\n");
         exit();
@@ -10,7 +20,8 @@
         header("Location: ../profile_page.php?err=Invalid email format.\n");
         exit();
     }
-    $email = $_POST['email'];
+    
+    $email = clean_data($_POST["email"]);
     $login = $_SESSION['user_login'];
     $pdo = connect_to_database();
     $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE email = :email');

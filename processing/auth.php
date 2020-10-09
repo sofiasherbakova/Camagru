@@ -3,8 +3,19 @@
     if (!isset($_SESSION))
         session_start();
     $title = "";
-    $login = trim($_POST["login"]);
-    $password = trim($_POST["password"]);
+    function clean_data($value)
+    {
+        $value = trim($value);
+        $value = stripslashes($value);
+        $value = strip_tags($value);
+        $value = htmlspecialchars($value);
+        $value = addslashes($value);
+        return ($value);
+    }
+    
+    $login = clean_data($_POST["login"]);
+    $password = clean_data($_POST["password"]);
+
     if(!empty($login) && !empty($password))
     {
         $pdo = connect_to_database();
