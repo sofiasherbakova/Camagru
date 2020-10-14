@@ -25,18 +25,20 @@
                 $st->execute($params);
                 $user = $st->fetch();
             ?>
-                <div class="gallery-item">
                     <div class="header-photo">
                         <div class="login-photo"><?php echo $user['login']; ?></div>
                         <form action=<?php echo 'processing/remove_image.php?image_id=' . $_GET['image_id']?> method='post'>
                             <input class='delete-photo' type="image" alt='Delete photo' src="img/delete.png">
                         </form>
                     </div>
-                    <img class="gallery-image" src="<?php echo $photo['img_path']; ?>">
-                    <input type="image" src="img/like.png" class="icon" id="like">
-                    <span id="counter_likes"></span>
+                <div>
+                    <img class="photo-image" src="<?php echo $photo['img_path']; ?>">
                 </div> 
                 <div class="comments">
+                    <div class="like-block">
+                        <input type="image" src="img/like.png" class="icon like-image" id="like">
+                        <div id="counter_likes"></div>
+                    </div>
                     <?php
                         $pdo = connect_to_database(); 
                         $sql = 'SELECT * FROM comments WHERE img_id = :img_id';
@@ -65,7 +67,7 @@
                     ?>
                         <form class='comment-form' action=<?php echo "processing/comments.php?image_id=". $_GET['image_id']?> method='post'>
                             <input class='comment-input' style='width:100%;' type='text' autocomplete='off' placeholder='Enter your comment' name='comment' required>
-                            <button class='button' type='submit'>Send</button>
+                            <button class='comment-button' type='submit'>Send</button>
                         </form>
             </div>
         </div>

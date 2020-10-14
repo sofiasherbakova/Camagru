@@ -12,15 +12,7 @@
 ?>
 <main>
     <div class="profile-container">
-        <div class="profile-menu">
-            <a href="profile_photos_page.php">Photos</a>
-            <a href="profile_comments_page.php">Comments</a>
-            <a href="profile_page.php">Settings</a>
-            <form action="processing/logout.php" method="post">
-                <button class="button-profile-menu" type="submit" name="OK">Log out</button>
-            </form>
-        </div>
-        <div class="profile-settings">
+        <div class="gallery">
             <?php
                 $pdo = connect_to_database();
                 $stmt = $pdo->prepare('SELECT id FROM users WHERE login = :login');
@@ -36,7 +28,7 @@
                 foreach ($photos_array as $value)
                 {
             ?>
-                <div class="">
+                <div class="gallery-item">
                     <a href='<?php echo "photo_page.php?image_id=" . $value['id'];?>'>
                         <img class="gallery-image" src="<?php echo $value['img_path']; ?>">
                     </a>

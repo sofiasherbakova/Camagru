@@ -9,7 +9,6 @@
         $title = "take photo";
     include_once "config/database.php";
     include "./templates/_head.php";
-    include "./templates/_header.php";
     
     if (isset($_POST['save']) && $_POST['save']) 
     {
@@ -49,13 +48,13 @@
 
         <div class="photo-edit__canvas">
             <img id="preview" src="img/no_image.png" alt="preview">
-            <img id="origin" src="img/1.jpg">
+            <img id="origin" src="img/no_image.png">
             <video id="video"></video>
             <canvas id="canvas"></canvas>
             <form><input type='button' id='snapshot' value="snapshot"></form>
         </div>
 
-        <div class="photo-upload">
+        <div class="photo-upload photo-upload-second">
             <label class="custom-file-upload">
                 <p>Shoot</p>
                 <input id='shoot' type="button">
@@ -65,12 +64,21 @@
             </label>
         </div>
 
+        <div class="photo-stickers">
+            <div id="stick" class="photo-carousel">
+                <div id="0" class="sticker"> <img class="carousel-item" src="img/School_21_logo-01.svg"></div>
+                <div id="1" class="sticker"> <img class="carousel-item" src="img/School_21_logo-05.svg"></div>
+                <div id="2" class="sticker"> <img class="carousel-item" src="img/School_21_logo-02.svg"></div>
+            </div>
+        </div>
+
         <form method="post" enctype="multipart/form-data">
             <input id="save" name="src" type="hidden" value="img/1.jpg">
             <input id="save_btn" class="button" name="save" type="submit" value="Save" disabled>
         </form>
     </div>
     </main>
+    <?php include "./templates/_header.php"; ?>
     <script src="js/camera.js"></script>
 </body>
 </html>

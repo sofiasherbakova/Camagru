@@ -18,7 +18,6 @@
     let file_upload = document.getElementById('file-upload');
 
     let snapchat = {
-        filter: "none",
         isClicked: false,
         stickers: []
     };
@@ -28,13 +27,15 @@
     let start_pos_x = 100;
     let start_pos_y = 100;
 
+
+
+
+
+
     function startup() {
         if (isInited)
-            destroyFiltersAndStickers();
+            destroyStickers();
         save_btn.disabled = true;
-        save_btn.style.background = "#E6E7ED";
-        save_btn.style.borderColor = "#E6E7ED";
-        save_btn.style.cursor = "auto";
         clear();
         navigator.mediaDevices.getUserMedia({
             video: true,
@@ -76,6 +77,13 @@
         clearphoto();
     }
 
+
+
+
+    
+
+
+
     function clearphoto() {
         let context = canvas.getContext('2d');
         context.fillStyle = "#AAA";
@@ -102,7 +110,7 @@
             shoot.setAttribute('disabled', 'disabled');
             save.value = preview.src;
             if (!isInited)
-                initFiltersAndStickers();
+                initStickers();
         } else {
             clearphoto();
         }
@@ -129,18 +137,12 @@
     startBtn.addEventListener('click', startup, false);
     upBtn.addEventListener('click', vidOff, false);
 
-    let filters = ['blur(5px)',
-        'grayscale(100%)',
-        'sepia(60%)',
-        'invert(100%)',
-        'brightness(200%)'
-    ];
 
-    function addFilter() {
-        snapchat['filter'] = filters[this.id];
-        render();
-    }
 
+
+
+
+//*****************************//
     function addSticker() {
         snapchat['stickers'].push({
             elem: document.getElementById('stick').getElementsByClassName('sticker')[this.id].getElementsByTagName('img')[0],
@@ -151,25 +153,16 @@
         );
         render();
     }
-
-    function initFiltersAndStickers() {
+    function initStickers() {
         isInited = true;
-
-        document.querySelectorAll('.filter').forEach(item => {
-            item.addEventListener('click', addFilter, false);
-        });
 
         document.querySelectorAll('.sticker').forEach(item => {
             item.addEventListener('click', addSticker, false);
         })
     }
 
-    function destroyFiltersAndStickers() {
+    function destroyStickers() {
         isInited = false;
-
-        document.querySelectorAll('.filter').forEach(item => {
-            item.removeEventListener('click', addFilter, false);
-        });
 
         document.querySelectorAll('.sticker').forEach(item => {
             item.removeEventListener('click', addSticker, false);
@@ -181,9 +174,7 @@
         context.canvas.width = photo.width;
         context.canvas.height = photo.height;
 
-        context.filter = snapchat['filter'];
         context.drawImage(photo, 0, 0, photo.width, photo.height);
-        context.filter = "none";
         if (snapchat['stickers']) {
             for (let el of snapchat['stickers']) {
                 if (el.isActive) {
@@ -201,7 +192,6 @@
     }
 
     function clear() {
-        snapchat['filter'] = "none";
         snapchat['stickers'] = [];
         preview.src = "img/preview.png";
     }
@@ -238,12 +228,22 @@
         }
         render();
     }, false);
+//*****************************//
+
+
+
+
+
+
+
+
+
 
     file_upload.addEventListener('click', function () {
         if (streaming)
             vidOff();
         if (!isInited)
-            initFiltersAndStickers();
+            initStickers();
     }, false);
 
     file_upload.addEventListener('change', function () {
@@ -252,7 +252,6 @@
                 alert("Wrong type file");
                 return;
             }
-            console.log("hello");
             clear();
             let reader = new FileReader();
             save_btn.removeAttribute("disabled");
