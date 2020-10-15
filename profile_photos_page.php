@@ -13,17 +13,24 @@
 <main>
     <div class="profile-container">
         <div class="gallery">
-            <?php
+             <?php
                 $pdo = connect_to_database();
                 $stmt = $pdo->prepare('SELECT id FROM users WHERE login = :login');
                 $params = [':login' => $_SESSION['user_login']];
                 $stmt->execute($params);
                 $user = $stmt->fetch();
                 $id = $user['id'];
-                $sql = 'SELECT img_path, id FROM images WHERE user_id = :id';
-                $params = [':id' => $id];
+
+                $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $limit = 6;
+                $offset = $limit * ($page - 1);
+                $sql = 'SELECT * FROM images';
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute($params);
+                $stmt->execute();
+                $pages = ceil($stmt->rowCount() / $limit);
+                $sql = 'SELECT * FROM images WHERE user_id = :id ORDER BY id DESC LIMIT ' . $offset . ', '. $limit;
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([':id' => $id]);
                 $photos_array = $stmt->fetchAll();
                 foreach ($photos_array as $value)
                 {
@@ -36,8 +43,8 @@
                 <?php
             }
             ?>
-        </div>
-    </div>
+            </div>
+            <?php include "templates/_pagination.php"; ?>
 </main>
 </body>
 </html>

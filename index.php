@@ -25,8 +25,8 @@
         <div>
             <form action="processing/auth.php" method="post" class="login-form">
                 <div>Glad to see you!</div>
-                <input type="text" class="input" placeholder="Your login" name="login">
-                <input type="password" class="input" placeholder="Your password" name="password">
+                <input type="text" class="input" placeholder="Your login" name="login" autocomplete="off" required>
+                <input type="password" class="input" placeholder="Your password" name="password" required>
                 <button type="submit" class="button" name="OK">Log in</button>
                 <div class="form-text">No account? <a class="form-link" href="reg_page.php">Create one!</a></div>
             </form>

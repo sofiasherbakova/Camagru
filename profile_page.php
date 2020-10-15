@@ -14,9 +14,9 @@
     <div class="profile-container">
         <div class="profile-settings">
             <form action="processing/change_login.php" method="post" class="profile-settings-list">
-                <div>Your login: <?php echo $_SESSION['user_login']?></div>
-                <input type="text" placeholder="New login" name="login">
-                <button type="submit" name="change_login">Change</button>
+                <div><strong>Your login: </strong><?php echo $_SESSION['user_login']?></div>
+                <input class="profile-input" type="text" placeholder="New login" name="login" autocomplete='off' required>
+                <button class="profile-button" type="submit" name="change_login">Change</button>
             </form>
             <?php
                 $pdo = connect_to_database();
@@ -28,19 +28,21 @@
             ?>
             <form action="processing/change_email.php" method="post" class="profile-settings-list">
                 <div><strong>Your email:</strong> <?php echo $user->email?> </div>
-                <input type="text" placeholder="New email" name="email">
-                <button type="submit" name="OK">Change</button>
+                <input class="profile-input" type="text" placeholder="New email" name="email" autocomplete='off' required>
+                <button class="profile-button" type="submit" name="OK">Change</button>
             </form>
             <form action="processing/change_password.php" method="post" class="profile-settings-list">
-                <div>Password</div>
-                <input type="password" placeholder="Old password" name="old_password">
-                <input type="password" placeholder="New password" name="new_password">
-                <input type="password" placeholder="Repeat password" name="repeat_password">
-                <button type="submit" name="OK">Change</button>
+                <div><strong>Password</strong></div>
+                <div>
+                    <input class="profile-input" type="password" placeholder="Old password" name="old_password" autocomplete='off' required>
+                    <input class="profile-input" type="password" placeholder="New password" name="new_password" autocomplete='off' required>
+                    <input class="profile-input" type="password" placeholder="Repeat password" name="repeat_password" autocomplete='off' required>
+                </div> 
+                <button class="profile-button" type="submit" name="OK">Change</button>
             </form>
             <form action="processing/notification.php" method="post" class="profile-settings-list">
-                <div>Notifications: <?php if ($user->notification) echo "on"; else echo "off";?></div>
-                <button type="submit" name="OK">Change</button>
+                <div><strong>Notifications: </strong><?php if ($user->notification) echo "on"; else echo "off";?></div>
+                <button class="profile-button" type="submit" name="OK">Change</button>
             </form>
         </div>
     </div>

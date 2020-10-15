@@ -43,7 +43,7 @@
         $stmt->execute($params);
         if($stmt->fetchColumn())
         {
-            header("Location: ../reg_page.php?err=TAn account with this email already exists\n");
+            header("Location: ../reg_page.php?err=An account with this email already exists\n");
             exit();
         }
         //генерирую уникальный токен
@@ -55,6 +55,6 @@
         $stmt->execute($params);
         $link ="http://" .  $_SERVER['HTTP_HOST'] . '/processing/activation_email.php?login=' . $login . '&key=' . $token;
         mail($email, 'Confirm the registration on Camagru', $link);
-        header('Location: ../index.php?err=Вы успешно зарегистрировались! Для подтверждения аккаунта перейдите по ссылке, которую мы отправили Вам на почту');
+        header('Location: ../index.php?err=You have successfully registered! To confirm your account, follow the link we sent to your email address');
     }
 
