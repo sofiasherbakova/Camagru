@@ -7,7 +7,7 @@
         session_start();
     if (isset($_SESSION['user_login']))
         header('Location: gallery_page.php');
-        $title = "Главная";
+    $title = "Главная";
     include_once "config/database.php";
 ?>
     <!DOCTYPE html>
@@ -25,13 +25,11 @@
 ?>
     <main>
         <div>
-            <form action="processing/auth.php" method="post" class="login-form">
-                <div>Glad to see you!</div>
-                <input type="text" class="input" placeholder="Your login" name="login" autocomplete="off" required>
-                <input type="password" class="input" placeholder="Your password" name="password" required>
-                <button type="submit" class="button" name="OK">Log in</button>
-                <div class="form-text">No account? <a class="form-link" href="reg_page.php">Create one!</a></div>
-                <div class="form-text"><a class="form-link" href="forgot_password.php">Forgot password</a></div>
+            <form action="processing/forgot_password.php" method="post" class="login-form">
+                <div>Reset the password</div>
+                    <input class="input" type="text" placeholder="Your email" name="email" autocomplete='off' required>
+                    <button class="profile-button" type="submit" name="OK">Next</button>
+                    <div class="form-text"><a class="form-link" href="index.php">Back</a></div>
             </form>
         </div>
         <?php

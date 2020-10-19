@@ -8,7 +8,6 @@
     $title = "register";
     include_once "config/database.php";
     include "./templates/_head.php";
-    include "./templates/_header.php";
 ?>
     <!DOCTYPE html>
     <html class="login-container">
@@ -16,6 +15,7 @@
             <meta charset="UTF-8">
             <title><?php echo $title; ?></title>
             <link rel="stylesheet" href="css/style.css">
+            <link rel="stylesheet" href="css/media.css">
         </head>
     <body>
 <?php

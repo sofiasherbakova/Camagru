@@ -23,6 +23,8 @@
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute();
                 $photos_array = $stmt->fetchAll();
+                if(!$photos_array)
+                    echo "There are no photos yet :(";
                 foreach ($photos_array as $value)
                 {
             ?>

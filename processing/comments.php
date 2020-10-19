@@ -15,6 +15,7 @@
 	$comment = strip_tags($comment);
 	$comment = htmlspecialchars($comment);
 	$comment = addslashes($comment);
+    $comment = substr($comment, 0, 100);
 
     $pdo = connect_to_database();
     $stmt = $pdo->prepare('SELECT id FROM users WHERE login = :login');

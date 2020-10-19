@@ -1,0 +1,18 @@
+@media screen and (min-width: 768px) and (max-width: 1070px) {
+    .gallery{
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .login-container{
+        background: none;
+        background-color: #d5d5d5;
+    }
+    .login-form{
+        left: 50%;
+    }
+    .gallery{
+        width: 90%;
+    }
+}

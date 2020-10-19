@@ -24,6 +24,8 @@
         header("Location: ../reg_page.php?err=Passwords are not match\n");
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         header("Location: ../reg_page.php?err=Invalid email format\n");
+    else if(!preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $password))
+        header("Location: ../reg_page.php?err=Your password is too simple\n");
     else {
         //проверка логина
         $pdo = connect_to_database();
@@ -53,7 +55,7 @@
         $params = ['login' => $login, 'email' => $email, 'password' => $password, 'token' => $token];
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
-        $link ="http://" .  $_SERVER['HTTP_HOST'] . '/processing/activation_email.php?login=' . $login . '&key=' . $token;
+        $link ="To confirm your account, follow the link http://" .  $_SERVER['HTTP_HOST'] . '/processing/activation_email.php?login=' . $login . '&key=' . $token;
         mail($email, 'Confirm the registration on Camagru', $link);
         header('Location: ../index.php?err=You have successfully registered! To confirm your account, follow the link we sent to your email address');
     }
